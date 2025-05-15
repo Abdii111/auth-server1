@@ -1,4 +1,4 @@
-package com.example.authserver1.service;
+package com.example.authserver.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

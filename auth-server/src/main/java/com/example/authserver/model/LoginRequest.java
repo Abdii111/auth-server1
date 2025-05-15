@@ -1,4 +1,4 @@
-package com.example.authserver1.model;
+package com.example.authserver.model;
 
 public class LoginRequest {
     private String username;

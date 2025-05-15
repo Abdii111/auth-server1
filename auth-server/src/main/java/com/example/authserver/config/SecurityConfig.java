@@ -1,4 +1,4 @@
-package com.example.authserver1.config;
+package com.example.authserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package com.example.authserver1.controller;
+package com.example.authserver.controller;
 
-import com.example.authserver1.model.LoginRequest;
-import com.example.authserver1.service.JwtService;
+import com.example.authserver.model.LoginRequest;
+import com.example.authserver.service.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
