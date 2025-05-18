@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  auth-server:
+    image: auth-server
+    ports:
+      - "8080:8080"
+
+  api-gateway:
+    image: api-gateway
+    ports:
+      - "8080:8080"  # Exponera gatewayen på port 8080
+    depends_on:
+      - auth-server
+      - joke-service
+      - quote-service
+
+  joke-service:
+    image: joke-service
+    ports:
+      - "8081:8081"
+
+  quote-service:
+    image: quote-service
+    ports:
+      - "8082:8082"
