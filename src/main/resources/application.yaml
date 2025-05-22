@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-server
+
+# Om du använder JWT hemlighet (kan också ligga i en separat config-klass eller .env)
+jwt:
+  secret: my-secret-key
+  expiration: 3600000  # 1 timme i millisekunder
