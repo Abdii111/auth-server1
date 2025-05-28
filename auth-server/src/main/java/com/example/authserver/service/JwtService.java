@@ -1,17 +1,18 @@
 package com.example.authserver.service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Du kan spara den i en fil sen
+    // Exakt 32 tecken (256 bit)
+    private final String secretString = "hemligtvärde1234567890hemligt1234";
+    private final SecretKey key = Keys.hmacShaKeyFor(secretString.getBytes());
 
     public String generateToken(String username) {
         return Jwts.builder()
