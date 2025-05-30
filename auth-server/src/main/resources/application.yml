@@ -2,13 +2,5 @@ server:
   port: 8080
 
 spring:
-  security:
-    oauth2:
-      authorizationserver:
-        issuer: http://auth-server:9000
-      resourceserver:
-        jwt:
-          secret: hemligtvärde1234567890hemligt1234
-
-
-  expiration: 3600000  # 1 timme i millisekunder
+  application:
+    name: auth-server
