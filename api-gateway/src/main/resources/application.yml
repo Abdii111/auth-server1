@@ -14,12 +14,16 @@ spring:
             - Path=/api/auth/**
         - id: joke-service
           uri: http://joke-service:8082
+          filters:
+            - StripPrefix=1
           predicates:
             - Path=/api/jokes/**
         - id: quote-service
           uri: http://quotee-service:8083
           predicates:
             - Path=/api/quotes/**
+          filters:
+              - StripPrefix=1
 
   main:
     web-application-type: reactive

@@ -1,6 +1,6 @@
-package com.example.jokeservice.filter;
+package com.example.quoteeservice.filter;
 
-import com.example.jokeservice.service.JwtService;
+import com.example.quoteeservice.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -32,43 +30,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // 1. Remove all cookies from response
-        Arrays.stream(request.getCookies())
-                .forEach(cookie -> {
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                });
-
-        // 2. Get authorization header
         final String authHeader = request.getHeader("Authorization");
-
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
+        final String jwt = authHeader.substring(7);
         try {
-            // 3. Extract and validate token
-            final String jwt = authHeader.substring(7);
             final String username = jwtService.extractUsername(jwt);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 if (jwtService.isTokenValid(jwt)) {
-                    // 4. Create authentication object
                     List<String> roles = jwtService.extractAuthorities(jwt);
-                    var authorities = roles.stream()
-                            .map(SimpleGrantedAuthority::new)
-                            .toList();
+                    var authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();
 
                     var authToken = new UsernamePasswordAuthenticationToken(
-                            username,
-                            null,
-                            authorities
+                            username, null, authorities
                     );
-
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                    // 5. Set authentication in context
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }

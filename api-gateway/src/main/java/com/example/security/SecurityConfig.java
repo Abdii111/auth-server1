@@ -29,7 +29,7 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveJwtDecoder jwtDecoder() {
-        String secretKey = "hemlignyckel";
+        String secretKey = "hemligtvärde1234567890hemligt1234";
         return NimbusReactiveJwtDecoder.withSecretKey(
                 new SecretKeySpec(secretKey.getBytes(), "HS256")
         ).build();

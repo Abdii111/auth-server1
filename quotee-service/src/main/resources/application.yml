@@ -9,3 +9,10 @@ spring:
       resourceserver:
         jwt:
           secret: hemligtvärde1234567890hemligt1234
+
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.security.oauth2.jwt: DEBUG
+    com.example: DEBUG  # Om du har egna paket du vill logga

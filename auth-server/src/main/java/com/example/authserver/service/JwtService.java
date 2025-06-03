@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtService {
@@ -17,9 +18,13 @@ public class JwtService {
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("authorities", List.of("SCOPE_jokes.read"))
+                .claim("authorities", List.of("SCOPE_quotee.read"))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1h
                 .signWith(key)
                 .compact();
     }
+
+
 }

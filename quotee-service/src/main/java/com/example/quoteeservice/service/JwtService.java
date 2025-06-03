@@ -1,8 +1,9 @@
-package com.example.jokeservice.service;
+package com.example.quoteeservice.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
+
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -14,7 +15,6 @@ public class JwtService {
             "hemligtvärde1234567890hemligt1234".getBytes(StandardCharsets.UTF_8)
     );
 
-    // Lägg till denna konstruktor för att logga nyckeln vid skapande av JwtService
     public JwtService() {
         System.out.println("Secret key: " +
                 Base64.getEncoder().encodeToString(secretKey.getEncoded()));
